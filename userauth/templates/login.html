@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <!-- Login Wrapper Start -->
+                <div class="login-wrapper">
+
+                    <!-- Login Title & Content Start -->
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title mb-2">Shaxsiy kabinetga kirish</h2>
+                        <p class="desc-content">Iltimos Login va Parolni kiriting</p>
+                    </div>
+                    <!-- Login Title & Content End -->
+
+                    <!-- Form Action Start -->
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <!-- Input Email Start -->
+                        
+                        <!-- Input Password End -->
+
+                        <!-- Checkbox/Forget Password Start -->
+                        <div class="single-input-item mb-3">
+                            <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                <div class="remember-meta mb-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                        <label class="custom-control-label" for="rememberMe">Eslab qolish</label>
+                                    </div>
+                                </div>
+                                <a href="#" class="forget-pwd mb-3">Parolni unutdingizmi?</a>
+                            </div>
+                        </div>
+                        <!-- Checkbox/Forget Password End -->
+
+                        <!-- Login Button Start -->
+                        <div class="single-input-item mb-3">
+                            <button class="btn btn btn-dark btn-hover-primary rounded-0" type="submit">Kirish</button>
+                        </div>
+                        <!-- Login Button End -->
+
+                        <!-- Lost Password & Creat New Account Start -->
+                        <div class="lost-password">
+                            <a href="{% url 'userauth:register'%}">Ro'yhatdan o'tish</a>
+                        </div>
+                        <!-- Lost Password & Creat New Account End -->
+
+                    </form>
+                    <!-- Form Action End -->
+
+                </div>
+                <!-- Login Wrapper End -->
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock content %}

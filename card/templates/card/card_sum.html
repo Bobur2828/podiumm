@@ -1,0 +1,288 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+    <!-- Breadcrumb Section Start -->
+    <div class="section">
+
+        <!-- Breadcrumb Area Start -->
+        <div class="breadcrumb-area bg-light">
+            <div class="container-fluid">
+                <div class="breadcrumb-content text-center">
+                    <h1 class="title">Xaridlar savatchasi</h1>
+                    <ul>
+                        <li>
+                            <a href="{% url 'index' %}">Bosh sahifa </a>
+                        </li>
+                        <li class="active"> Xaridlar savatchasi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Area End -->
+
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Shopping Cart Section Start -->
+    <div class="section section-margin">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Cart Table Start -->
+                    <div class="cart-table table-responsive">
+                        <table class="table table-bordered">
+
+                            <!-- Table Head Start -->
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">Foto</th>
+                                    <th class="pro-title">Malumot</th>
+                                    <th class="pro-price">Narxi</th>
+                                    <th class="pro-quantity">Sanog'i</th>
+                                    <th class="pro-subtotal">Summa</th>
+                                    <th class="pro-remove">O'chirish</th>
+                                </tr>
+                            </thead>
+                            <!-- Table Head End -->
+
+                            <!-- Table Body Start -->
+                            <tbody>
+                                {% for prod in card_prod %}
+                                <tr>
+                                    <td class="pro-thumbnail"><a href="{% url 'single_product' prod.slug %}"><img class="img-fluid" src="{{ prod.photo1.url }}" alt="Product" /></a></td>
+                                    
+                                   
+                                    <td class="pro-title"><a href="{% url 'single_product' prod.slug %}">Mahsulot nomi : <br>{{ prod.name}} <br> Brendi:<br> {{ prod.brand }} <br> Kategoriya: <br> {{ prod.category }} </a></td>
+                                    
+                                   
+                                    {% if prod.sale == True%}
+                                    <td class="pro-price"><span>{{ prod.sale_price }} so'm </span></td>
+                                    {% else %}
+                                    <td class="pro-price"><span>{{ prod.price }} so'm</span></td>
+                                    {% endif %}
+                                    <td class="pro-quantity">
+                                        <div class="quantity">
+                                            {% for key,value in card_count.items %}
+                                                {% if key == prod.id|slugify %}
+                                                  
+                                     
+                                            <div class="cart-plus-minus update-cart" data-index="{{prod.id}}">
+                                                <input class="cart-plus-minus-box" id="select{{prod.id}}" value="{{value}}" type="text">
+                                                <div class="dec qtybutton " >-</div>
+                                                <div class="inc qtybutton update-cart" >+</div>
+                                                <div class="dec qtybutton update-cart"><i class="fa fa-minus"></i></div>
+                                                <div class="inc qtybutton update-cart"><i class="fa fa-plus "></i></div>
+
+                                                
+                                               
+                                               
+                                            </div> 
+
+
+
+                                            {% endif %}
+                                            {% endfor %}   
+                                        </div>
+                                    </td>
+                                    {% for key,value in umumiy_narx.items %}
+                                    {% if key == prod.id|slugify %}
+                                   
+                                   
+                                    <td class="pro-subtotal"> <span>{{ value }} so'm</span></td>
+                                    
+                                    {% endif %}
+                                    {% endfor %}
+                                    <td class="pro-remove delete delete-product" data-index="{{prod.id}}"><a href="#"><i class="pe-7s-trash  " ></i></a></td>
+                                </tr>
+                                {% endfor %}
+                               
+                            </tbody>
+                            <!-- Table Body End -->
+
+                        </table>
+                    </div>
+                    <!-- Cart Table End -->
+
+                    <!-- Cart Update Option Start -->
+                    <div class="cart-update-option d-block d-md-flex justify-content-between">
+
+                        <!-- Apply Coupon Wrapper Start -->
+                        <div class="apply-coupon-wrapper">
+                            <form action="#" method="post" class=" d-block d-md-flex">
+                                <input type="text" placeholder="Promokodingizni kiriting" required />
+                                <button class="btn btn-dark btn-hover-primary rounded-0">Promokodni tasdiqlang </button>
+                            </form>
+                        </div>
+                        <!-- Apply Coupon Wrapper End -->
+
+                        <!-- Cart Update Start -->
+                        <div class="cart-update mt-sm-16">
+                            <a href="#" class="btn btn-dark btn-hover-primary rounded-0">Kartani tahrirlash </a>
+                        </div>
+                        <!-- Cart Update End -->
+
+                    </div>
+                    <!-- Cart Update Option End -->
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5 ms-auto col-custom">
+
+                    <!-- Cart Calculation Area Start -->
+                    <div class="cart-calculator-wrapper">
+
+                        <!-- Cart Calculate Items Start -->
+                        <div class="cart-calculate-items">
+
+                            <!-- Cart Calculate Items Title Start -->
+                            <h3 class="title">Buyurtma narxi</h3>
+                            <!-- Cart Calculate Items Title End -->
+
+                            <!-- Responsive Table Start -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <td>Umumiy hisob</td>
+                                        <td>{{ total }} so'm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Promokod chegirmasi</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Umumiy hisob</td>
+                                        <td class="total-amount">{{ total }} so'm</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Responsive Table End -->
+
+                        </div>
+                        <!-- Cart Calculate Items End -->
+
+                        <!-- Cart Checktout Button Start -->
+                        <a href="{% url 'checkout' %}" class="btn btn-dark btn-hover-primary rounded-0 w-100">Buyurtmani rasmiylashtirish</a>
+                        <!-- Cart Checktout Button End -->
+
+                    </div>
+                    <!-- Cart Calculation Area End -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            // Minus tugmasi bosilganda
+            $('.dec').click(function () {
+                var currentValue = parseInt($(this).siblings('.cart-plus-minus-box').val());
+                // Mahsulot miqdori 1 dan kichik bo'lsa, avvalro'q qiymatni 1 qilib qaytarib chiqamiz
+                if(currentValue > 1) {
+                    $(this).siblings('.cart-plus-minus-box').val(currentValue);
+                    updateSubtotal($(this));
+                }
+            });
+    
+            // Plus tugmasi bosilganda
+            $('.inc').click(function () {
+                var currentValue = parseInt($(this).siblings('.cart-plus-minus-box').val());
+                // Yangi miqdorni hisoblaymiz va input qiymatini o'zgartiramiz
+                $(this).siblings('.cart-plus-minus-box').val(currentValue);
+                updateSubtotal($(this));
+            });
+    
+            // Mahsulot miqdorining o'zgartirilishi bilan umumiy summani hisoblash
+            function updateSubtotal(element) {
+                var currentQuantity = parseInt(element.siblings('.cart-plus-minus-box').val());
+                var pricePerItem = parseFloat(element.closest('tr').find('.pro-price span').text().replace(' so\'m', ''));
+                var subtotal = currentQuantity * pricePerItem;
+                element.closest('tr').find('.pro-subtotal span').text(subtotal.toFixed() + ' so\'m');
+            }
+            
+        });
+
+        
+        
+    </script>
+    
+   <!-- Single Product Section End -->
+   <script>  //update  product uchun 
+    $(document).on('click','.update-cart', function(e){
+        e.preventDefault();
+        var product_id = $(this).data('index');
+        console.log(product_id);
+        
+        var product_count = $('#select'+ product_id).val();
+        if (isNaN(product_count) || product_count === '' || product_count === null || parseInt(product_count) < 0) {
+            product_count = 1;
+        } else {
+            product_count = parseInt(product_count);
+        }
+      
+        $.ajax({
+            type:'POST',
+            url:"{% url 'card:card_update' %}",
+            data:{
+                product_id:product_id,
+                product_count:product_count,
+                csrfmiddlewaretoken:"{{csrf_token}}",
+                action:'post'
+            },
+            success: function(){
+                location.reload()
+                $('#productAddedModal').modal('show'); 
+                setTimeout(function() {
+                    $('#productAddedModal').modal('hide'); 
+                }, 2000);   
+            },
+            error:function(xhr, errmsg, err){
+
+            }
+        })
+    })
+    </script>
+    <script>  //delete uchun
+        $(document).on('click','.delete-product', function(e){
+            e.preventDefault();
+            var product_id = $(this).data('index');
+            console.log(product_id);
+            
+            var product_count = $('#select'+ product_id).val();
+            if (isNaN(product_count) || product_count === '' || product_count === null || parseInt(product_count) < 0) {
+                product_count = 1;
+            } else {
+                product_count = parseInt(product_count);
+            }
+          
+            $.ajax({
+                type:'POST',
+                url:"{% url 'card:card_delete' %}",
+                data:{
+                    product_id:product_id,
+                    product_count:product_count,
+                    csrfmiddlewaretoken:"{{csrf_token}}",
+                    action:'post'
+                },
+                success: function(){
+                    $('#delete').modal('show'); 
+                    setTimeout(function() {
+                        $('#delete').modal('hide');
+                        location.reload();
+                    }, 2000);   
+                },
+                error:function(xhr, errmsg, err){
+    
+                }
+            })
+        })
+        </script>
+    
+    <!-- Shopping Cart Section End -->
+
+    {% endblock content %}

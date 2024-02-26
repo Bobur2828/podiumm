@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center"> <!-- Center content horizontally -->
+        <div class="col-lg-6 col-md-8 col-sm-10"> <!-- Adjust width as needed -->
+            <!-- Register Wrapper Start -->
+            <div class="register-wrapper">
+
+                <!-- Login Title & Content Start -->
+                <div class="section-content text-center mb-5">
+                    <h2 class="title mb-2">Ro'yhatdan o'tish</h2>
+                    <p class="desc-content">Iltimos shaxsiy kabinetga kirish uchun ro'yhatdan o'ting</p>
+                </div>
+                <!-- Login Title & Content End -->
+
+                <!-- Form Action Start -->
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <!-- Checkbox & Subscribe Label Start -->
+                    <div class="single-input-item mb-3">
+                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                            <div class="remember-meta mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="rememberMe-2">
+                                    <label class="custom-control-label" for="rememberMe-2">Yangiliklardan habardor bo'lish</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Checkbox & Subscribe Label End -->
+
+                    <!-- Register Button Start -->
+                    <div class="single-input-item mb-3">
+                        <button class="btn btn btn-dark btn-hover-primary rounded-0">Ro'yhatdan otish</button>
+                    </div>
+                    <!-- Register Button End -->
+
+                </form>
+                <!-- Form Action End -->
+
+            </div>
+            <!-- Register Wrapper End -->
+        </div>
+    </div>
+</div>
+{% endblock content %}
