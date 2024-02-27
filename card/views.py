@@ -29,8 +29,9 @@ def card_add(request):
     if request.POST.get('action')=='post':
         product_id=(request.POST.get('product_id'))
         product_count=int(request.POST.get('product_count'))
+       
         product=get_object_or_404(Product, id=product_id)
-        print(request.POST.get('product_count'))
+      
 
 
         if product is not card:

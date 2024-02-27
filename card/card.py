@@ -9,6 +9,8 @@ class Card:
     def add(self, product, product_count):
         product_id = str(product.id)
         product_count = int(product_count)
+       
+
         if product_id in self.card:
             messages.success(self("Maxsulot allaqachon savatchada mavjud"))
 

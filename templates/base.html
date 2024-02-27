@@ -535,31 +535,17 @@
         <i class="arrow-top fa fa-long-arrow-up"></i>
         <i class="arrow-bottom fa fa-long-arrow-up"></i>
     </a>
-    <div class="modal fade" id="productAddedModal" tabindex="-1" aria-labelledby="productAddedModalLabel" aria-hidden="true">
+    
+    
+    <div class="modal fade" id="mavjud" tabindex="-1" aria-labelledby="mavjud" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productAddedModalLabel">Uraaaaaa!</h5>
+                    <h5 class="modal-title" id="mavjud">Xabar! &#128400;</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Mahsulot savatchaga muvaffaqiyatli qo'shildi!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delete">Afsus! &#128542;</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Mahsulot savatchadan ochirildi!
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
@@ -612,6 +598,8 @@
             e.preventDefault();
             var product_id = $(this).attr("value");
             var product_count = $('#quantity').val();
+            var product_size = $('#size').val();
+
             if (isNaN(product_count) || product_count === '' || product_count === null || parseInt(product_count) < 0) {
                 product_count = 1;
             } else {
@@ -624,21 +612,26 @@
                 data:{
                     product_id:product_id,
                     product_count:product_count,
+                    product_size:product_size,
                     csrfmiddlewaretoken:"{{csrf_token}}",
                     action:'post'
                 },
                 success: function(json){
-                    
-                    document.getElementById("card_items").textContent = json.card_items
-                    $('#productAddedModal').modal('show'); 
+                    $('#mavjud .modal-body').html('Mahsulot savatchaga qoshildi' );
+                    $('#mavjud').modal('show');
                     setTimeout(function() {
-                        $('#productAddedModal').modal('hide'); 
-                        location.reload();  
+                    $('#mavjud').modal('hide');
+                    location.reload();
                     }, 2000);
+                    
                    
                 },
                 error:function(xhr, errmsg, err){
-    
+                    $('#mavjud .modal-body').html('Mahsulot allaqachon savatchada' );
+                    $('#mavjud').modal('show');
+                    setTimeout(function() {
+                    $('#mavjud').modal('hide');
+                    }, 2000);
                 }
             })
         })
@@ -687,10 +680,11 @@
                     action:'post'
                 },
                 success: function(){
-                    $('#delete').modal('show'); 
+                    $('#mavjud .modal-body').html('Mahsulot savatchadan ochirildi' );
+                    $('#mavjud').modal('show');
                     setTimeout(function() {
-                        $('#delete').modal('hide');
-                        location.reload();
+                    $('#mavjud').modal('hide');
+                    location.reload();
                     }, 2000);   
                 },
                 error:function(xhr, errmsg, err){

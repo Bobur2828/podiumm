@@ -134,9 +134,9 @@
                             <div class="product-size">
                                 <span>Mavjud o'lchamlar:</span>
                                 <select class="size-option">
-                                    <option disabled selected>Tanlang...</option>
+                                    <option disabled selected >Tanlang...</option>
                                     {% for size in product.size.all %}
-                                        <option value="{{ size }}">{{ size }}</option>
+                                        <option id="size" >{{ size }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
