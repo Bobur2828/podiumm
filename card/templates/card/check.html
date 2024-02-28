@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+    .custom-table {
+        width: 100%; /* Set a fixed width for the table */
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <!-- BEGIN INVOICE -->
+        <div class="col-xs-12">
+            <div class="grid invoice">
+                <div class="grid-body">
+                    <div class="invoice-title">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img src="http://vergo-kertas.herokuapp.com/assets/img/logo.png" alt="" height="35">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            {% for order in orders %}
+                            <div class="col-xs-12">
+                                <h2>Buyurtma raqami №{{order.order}}<br>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                                <strong>Sotuvchi:</strong><br>
+                                Podium_Uz do'koni.<br>
+                                Farg'ona shaxar<br>
+                                Mustaqilli ko'chasi 34-uy<br>
+                                <abbr title="Phone">Tel:</abbr> +998-91-662-42-22
+                            </address>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <address>
+                                <strong>Buyurtmachi:</strong><br>
+                                <p>{{user.first_name}}<br>{{user.last_name}}<br>{{user.profile.city}}<br>{{user.profile.adress}}</p>
+                                <abbr title="Phone">Tel:</abbr> {{user.profile.phone_number}}
+                            </address>
+                        </div>
+                        <div class="col-xs-6 ">
+                            <address>
+                                <strong>Buyurtma sanasi:</strong><br>
+                                    
+                                    {{ order.order_date}}
+                                        
+                                    
+
+                              
+                            </address>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>BUYURTMA XULOSASI</h3>
+                            <table class="table table-striped mx-center custom-table">
+                                <thead>
+                                    <tr class="line">
+
+                                        
+                                        <td><strong>MAHSULOT</strong></td>
+                                        
+                                        <td class="text-center"><strong>NARX</strong></td>
+                                        <td class="text-center"><strong>DONA</strong></td>
+                                        
+                                        <td class="text-center"><strong>NARX </strong></td>
+                                        
+                                        
+
+                                    </tr>
+                                </thead>
+                                {% for ord in order.items %}
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">
+                                            
+                                            <strong>{{ ord.name}}</strong>
+                                          
+                                            
+                                        </td>
+                                        <td class="text-center">
+                                            
+                                            {{ ord.price}} so'm
+                                          
+                                          
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                          
+                                            <p></p>
+                                            {{ ord.quantity }} dona
+                                            <p></p>
+                                            
+                                           
+                                        </td>
+                                        <td class="text-right">
+                                         
+                                            {{ ord.get_total_price }} so'm
+                                            
+                                           
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td class="text-right"><strong></strong></td>
+                                    </tr>
+                                    <hr class="line">
+                                    {% endfor %}
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td class="text"><strong>UMUMIY SUMMA</strong></td>
+                                        <td class="text-right"><strong>{{ order.items.0.order.total_price }} so'm</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-md-12 text-right identity">
+                            <img src="{% static 'my_app/assets/images/logo/log3.png' %}" alt="Designer Image" width="150" height="150">
+                            <a>
+                                <p class="text-left">Direktor<br><strong>Gulomov Boburjon</strong></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END INVOICE -->
+    </div>
+</div>
+</div>
+{% endblock content %}

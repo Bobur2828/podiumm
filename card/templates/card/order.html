@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Breadcrumb Section Start -->
+    <div class="section">
+
+        <!-- Breadcrumb Area Start -->
+        <div class="breadcrumb-area bg-light">
+            <div class="container-fluid">
+                <div class="breadcrumb-content text-center">
+                    <h1 class="title">Mening buyurtmalarim</h1>
+                    <ul>
+                        <li>
+                            <a href="index.html">Bosh sahifa </a>
+                        </li>
+                        <li class="active"> Mening buyurtmalarim</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Area End -->
+
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Wishlist Section Start -->
+    <div class="section section-margin">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="wishlist-table table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">Buyurtma raqami</th>
+                                    <th class="pro-title">Mahsulotlar</th>
+                                    <th class="pro-price">Dona uchun narx </th>
+                                    <th class="pro-stock">Dona</th>
+                                    <th class="pro-cart">Umumiy hisob</th>
+                                    <th class="pro-remove">To'lov uchun </th>
+                                    <th class="pro-remove">Chek</th>
+
+                                    {% comment %} <th class="pro-remove">To'lov  </th> {% endcomment %}
+
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {% for order in orders %}
+                                
+                                <tr>
+                                    <td class="pro-title"><a href="#">№ {{order.order }} </a></td>
+                                      
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                {% for ord in order.items %}
+                                                    <li>{{ ord.name }}</li>
+                                                {% endfor %}
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                {% for ord in order.items %}
+                                                    <li>{{ ord.price }} so'm</li>
+                                                {% endfor %}
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                {% for ord in order.items %}
+                                                    <li>{{ ord.quantity }} </li>
+                                                {% endfor %}
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                {% for ord in order.items %}
+                                                    <li>{{ ord.get_total_price }} so'm </li>
+                                                {% endfor %}
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                              
+                                                    <li>{{ order.items.0.order.total_price }} so'm</li>
+                                         
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                               
+                                                <a href="{% url 'card:check' order.order %}">
+                                                    <button type="button">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                                      </svg>
+                                                    </button>
+                                                  </a>
+                                         
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                   
+                                    
+                                    {% comment %} <td class="pro-cart"><a href="cart.html" class="btn btn-dark btn-hover-primary rounded-0">To'lov</a></td> {% endcomment %}
+                                    {% comment %} <td class="pro-remove"><a href="#"><i class="pe-7s-trash"></i></a></td> {% endcomment %}
+                                    {% endfor %}
+
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Wishlist Section End -->
+
+    {% endblock content %}
