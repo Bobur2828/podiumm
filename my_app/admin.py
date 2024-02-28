@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Slider, Aksiya, Category, Product, Size,Colors,Brands,Client, Order, Profile
+from .models import Slider, Aksiya, Category, Product, Size,Colors,Brands, Profile,Order, OrderItem
 
-admin.site.register([Slider, Aksiya,Client, Order])
+admin.site.register([Slider, Aksiya,Order,OrderItem])
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):

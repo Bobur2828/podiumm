@@ -1,6 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from my_app.models import Product
+from django import template
+
+
 class Card:
     def __init__(self, request):
         self.session = request.session
@@ -61,3 +64,38 @@ class Card:
                     else:
                         total += product.price * int(value)
         return total 
+    
+    def get_all_info(self):
+        products=self.get_products()
+        quantity=self.get_count() 
+        
+        result = []
+
+        for product in products:
+            if str(product.id) in quantity:
+                if product.sale == True:
+                    data={
+                        'id': product.id,
+                        'name': product.name,
+                        'price': product.sale_price,
+                        'quantity': quantity[str(product.id)],
+
+                    }
+                    result.append(data)
+                else:
+                    data={
+                        'id': product.id,
+                        'name': product.name,
+                        'price': product.price,
+                        'quantity': quantity[str(product.id)],
+
+                    }
+                    result.append(data)
+                    
+        return result
+    
+
+    def cardclear(self):
+        self.card.clear()
+        self.session.modified = True
+        return self.card
